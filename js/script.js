@@ -19,6 +19,22 @@ requestButton.addEventListener('click', function () {
 // Submit event for inspection form
 inspectionForm.addEventListener('submit', function (event) {
   event.preventDefault(); // stop page refresh
+  // ===== JS FORM VALIDATION =====
+
+  const nameInput = document.getElementById('name').value.trim();
+  const propertyTypeInput = document.getElementById('property-type').value;
+
+  // Name validation
+  if (nameInput.length < 2) {
+    alert('Please enter a valid name.');
+    return;
+  }
+
+  // Property type validation
+  if (propertyTypeInput === '') {
+    alert('Please select a property type.');
+    return;
+  }
 
   // Show confirmation section
   confirmationSection.hidden = false;
@@ -31,7 +47,7 @@ inspectionForm.addEventListener('submit', function (event) {
 
   // Update confirmation text
   document.getElementById('confirmation-message').textContent =
-    `Thank you, ${userName}. Your inspection request has been received.`;
+  `Thank you, ${userName}. Your inspection request has been received.`;
 
   // Add visual emphasis
   confirmationSection.style.border = '2px solid green';
@@ -41,3 +57,43 @@ inspectionForm.addEventListener('submit', function (event) {
   document.getElementById('submit-btn').setAttribute('disabled', 'true');
 
 });
+
+// ===== SERVICES INTERACTION =====
+
+// Loop through each service item
+serviceItems.forEach(function (item) {
+  item.addEventListener('click', function () {
+
+    // Remove highlight from all services
+    serviceItems.forEach(function (service) {
+      service.style.backgroundColor = '';
+    });
+
+    // Highlight the clicked service
+    this.style.backgroundColor = '#e0ffe0';
+
+    // Example of parent navigation
+    const servicesSection = this.parentNode;
+    servicesSection.style.border = '1px solid #ccc';
+  });
+});
+
+// Create a new log entry
+const logEntry = document.createElement('p');
+
+// Get selected property type
+const propertyType = document.getElementById('property-type').value;
+
+// Set log text
+logEntry.textContent = `Inspection requested for ${propertyType} property.`;
+
+// Append to submission log
+document.getElementById('submission-log').appendChild(logEntry);
+
+// ===== BOM FEATURES =====
+
+// Alert user
+alert('Your inspection request has been submitted successfully!');
+
+// Save name to localStorage
+localStorage.setItem('lastUser', userName);
