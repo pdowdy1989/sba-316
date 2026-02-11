@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | P.E.D Aerial</title>
+  <meta name="description" content="Get in touch with P.E.D Aerial for drone inspection services.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body id="top">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">P.E.D <span>Aerial</span></a>
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Get Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="portal.html" class="portal-link">Client Portal</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main-content">
+  <section class="page-content contact-page">
+    <div class="page-header">
+      <h1><i class="fas fa-comments"></i> Get In Touch</h1>
+      <p class="subtitle">Have questions? Want to discuss your project? We're here to help.</p>
+    </div>
+    <div class="contact-wrapper">
+      <div class="contact-form-section">
+        <h2>Send Us a Message</h2>
+        <form id="contact-form" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contact-name">Name *</label>
+              <input type="text" id="contact-name" required>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email *</label>
+              <input type="email" id="contact-email" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">Phone</label>
+            <input type="tel" id="contact-phone">
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">What can we help you with? *</label>
+            <select id="contact-subject" required>
+              <option value="">Select a topic...</option>
+              <option value="quote">Request a Quote</option>
+              <option value="question">General Question</option>
+              <option value="existing">Existing Project</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message *</label>
+            <textarea id="contact-message" rows="6" required placeholder="Tell us about your project or question..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary btn-large">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+      <div class="contact-info-section">
+        <h2>Contact Information</h2>
+        <div class="contact-info-box">
+          <div class="contact-info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Phone</h3>
+              <p>(555) 123-4567</p>
+              <small>Mon-Sat: 8am-6pm</small>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>hello@pedaerial.com</p>
+              <small>Response within 24 hours</small>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h3>Service Area</h3>
+              <p>Central Ohio</p>
+              <small>Travel available for larger projects</small>
+            </div>
+          </div>
+        </div>
+        <div class="quick-links-box">
+          <h3>Rather calculate your cost first?</h3>
+          <p>Use our transparent pricing calculator to see exactly what your inspection will cost.</p>
+          <a href="pricing.html" class="btn-secondary">
+            <i class="fas fa-calculator"></i> Get Instant Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>P.E.D Aerial</h3>
+      <p>FAA-certified drone inspection services.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+        <li><i class="fas fa-envelope"></i> hello@pedaerial.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 P.E.D Aerial. All rights reserved.</p>
+  </div>
+</footer>
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</a>
+<div id="contact-success-modal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2><i class="fas fa-check-circle"></i> Message Sent!</h2>
+    </div>
+    <div class="modal-body">
+      <p>Thanks for reaching out! We'll get back to you within 24 hours.</p>
+      <button class="btn-primary" onclick="document.getElementById('contact-success-modal').classList.remove('active')">Close</button>
+    </div>
+  </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

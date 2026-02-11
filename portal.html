@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Portal | P.E.D Aerial</title>
+  <meta name="description" content="Track your drone inspection projects and access deliverables.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Dashboard Styles */
+    .dashboard-wrapper {
+      display: flex;
+      min-height: calc(100vh - 70px);
+      background: var(--gray-light);
+    }
+    
+    .dashboard-sidebar {
+      width: 280px;
+      background: white;
+      border-right: 1px solid var(--border);
+      padding: 2rem 0;
+    }
+    
+    .sidebar-header {
+      padding: 0 2rem 2rem;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    
+    .user-avatar {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--orange), #ff5722);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+    
+    .user-name {
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.25rem;
+    }
+    
+    .user-email {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    
+    .dashboard-nav {
+      padding: 2rem 0;
+    }
+    
+    .dashboard-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      color: var(--charcoal);
+      text-decoration: none;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+    }
+    
+    .dashboard-nav-item:hover,
+    .dashboard-nav-item.active {
+      background: var(--gray-light);
+      border-left-color: var(--orange);
+      color: var(--orange);
+    }
+    
+    .dashboard-nav-item i {
+      width: 20px;
+      text-align: center;
+    }
+    
+    .nav-badge {
+      margin-left: auto;
+      background: var(--orange);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .dashboard-content {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .dashboard-section {
+      display: none;
+    }
+    
+    .dashboard-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section-header {
+      margin-bottom: 2rem;
+    }
+    
+    .section-header h1 {
+      font-size: 2rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-header p {
+      color: var(--gray);
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .stat-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    
+    .stat-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gray-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: var(--orange);
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .project-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+    
+    .project-title {
+      font-weight: 600;
+      color: var(--charcoal);
+      font-size: 1.1rem;
+    }
+    
+    .project-status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .status-pending { background: #fff3e0; color: #e65100; }
+    .status-in-progress { background: #e3f2fd; color: #1565c0; }
+    .status-completed { background: #e8f5e9; color: #2e7d32; }
+    
+    .project-details {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin: 0.5rem 0;
+    }
+    
+    .project-details i {
+      color: var(--orange);
+      margin-right: 0.5rem;
+      width: 16px;
+    }
+    
+    .project-footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .project-date {
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+    
+    .btn-view {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    
+    .btn-view:hover {
+      background: #ff5722;
+    }
+    
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .deliverable-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    
+    .deliverable-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .deliverable-thumbnail {
+      height: 150px;
+      background: var(--gray-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--gray);
+    }
+    
+    .deliverable-info {
+      padding: 1rem;
+    }
+    
+    .deliverable-name {
+      font-weight: 600;
+      color: var(--charcoal);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .deliverable-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+    
+    .btn-download {
+      margin-top: 0.75rem;
+      width: 100%;
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    
+    .btn-download:hover {
+      background: #ff5722;
+    }
+    
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--gray);
+    }
+    
+    .empty-state i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.3;
+    }
+    
+    .empty-state h3 {
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+    
+    .logout-btn {
+      margin: 2rem;
+      width: calc(100% - 4rem);
+      background: none;
+      border: 2px solid var(--border);
+      padding: 0.75rem;
+      border-radius: 8px;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .logout-btn:hover {
+      border-color: var(--error);
+      color: var(--error);
+      background: rgba(239, 68, 68, 0.05);
+    }
+    
+    /* Login Screen */
+    .login-screen {
+      min-height: calc(100vh - 400px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+    }
+    
+    .login-container {
+      max-width: 450px;
+      width: 100%;
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .login-icon {
+      font-size: 4rem;
+      color: var(--orange);
+      margin-bottom: 1.5rem;
+    }
+    
+    .login-container h1 {
+      margin-bottom: 0.5rem;
+    }
+    
+    .login-form {
+      margin: 2rem 0;
+      text-align: left;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--charcoal);
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 0.875rem;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,107,53,0.1);
+    }
+    
+    .form-group small {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-wrapper {
+        flex-direction: column;
+      }
+      
+      .dashboard-sidebar {
+        width: 100%;
+      }
+      
+      .stats-grid,
+      .projects-grid,
+      .deliverables-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">P.E.D <span>Aerial</span></a>
+    
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html">Get Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html" class="active portal-link">Client Portal</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  
+  <!-- LOGIN SCREEN (Always shown first) -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-container">
+      <div class="login-icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      
+      <h1>Client Portal Login</h1>
+      <p style="color: var(--gray); margin-bottom: 2rem;">
+        Access your projects, deliverables, and tracking information
+      </p>
+      
+      <form id="portal-login-form" class="login-form">
+        <div class="form-group">
+          <label for="login-email">
+            <i class="fas fa-envelope"></i> Email Address
+          </label>
+          <input 
+            type="email" 
+            id="login-email" 
+            required 
+            placeholder="your@email.com"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="login-code">
+            <i class="fas fa-key"></i> Access Code (Optional)
+          </label>
+          <input 
+            type="text" 
+            id="login-code" 
+            placeholder="From your confirmation email"
+          >
+          <small>Leave blank for demo mode with sample projects</small>
+        </div>
+        
+        <button type="submit" class="btn-primary btn-large" style="width: 100%;">
+          <i class="fas fa-sign-in-alt"></i> Access Portal
+        </button>
+      </form>
+      
+      <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
+          <strong>Don't have an account yet?</strong>
+        </p>
+        <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 1rem;">
+          Book your first inspection to get access
+        </p>
+        <a href="pricing.html" class="btn-secondary">
+          <i class="fas fa-calculator"></i> Get Pricing & Book
+        </a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- DASHBOARD (Hidden until login) -->
+  <div id="dashboard-wrapper" class="dashboard-wrapper" style="display: none;">
+    
+    <!-- Sidebar -->
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-header">
+        <div class="user-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="user-name" id="user-name">User</div>
+        <div class="user-email" id="user-email">email@example.com</div>
+      </div>
+      
+      <nav class="dashboard-nav">
+        <a class="dashboard-nav-item active" data-section="overview">
+          <i class="fas fa-home"></i>
+          <span>Overview</span>
+        </a>
+        <a class="dashboard-nav-item" data-section="projects">
+          <i class="fas fa-folder-open"></i>
+          <span>My Projects</span>
+          <span class="nav-badge" id="project-count">0</span>
+        </a>
+        <a class="dashboard-nav-item" data-section="deliverables">
+          <i class="fas fa-images"></i>
+          <span>Deliverables</span>
+        </a>
+        <a class="dashboard-nav-item" data-section="pricing">
+          <i class="fas fa-calculator"></i>
+          <span>New Quote</span>
+        </a>
+      </nav>
+      
+      <button class="logout-btn" id="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Sign Out
+      </button>
+    </aside>
+    
+    <!-- Main Content -->
+    <div class="dashboard-content">
+      
+      <!-- OVERVIEW SECTION -->
+      <section id="overview-section" class="dashboard-section active">
+        <div class="section-header">
+          <h1><i class="fas fa-home"></i> Dashboard Overview</h1>
+          <p>Welcome back! Here's what's happening with your projects.</p>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-folder"></i></div>
+            <div class="stat-value" id="total-projects">0</div>
+            <div class="stat-label">Total Projects</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-spinner"></i></div>
+            <div class="stat-value" id="active-projects">0</div>
+            <div class="stat-label">In Progress</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-value" id="completed-projects">0</div>
+            <div class="stat-label">Completed</div>
+          </div>
+          
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-images"></i></div>
+            <div class="stat-value" id="total-files">0</div>
+            <div class="stat-label">Files Available</div>
+          </div>
+        </div>
+        
+        <h2 style="margin-bottom: 1.5rem; color: var(--charcoal);">Recent Projects</h2>
+        <div id="recent-projects" class="projects-grid"></div>
+      </section>
+      
+      <!-- PROJECTS SECTION -->
+      <section id="projects-section" class="dashboard-section">
+        <div class="section-header">
+          <h1><i class="fas fa-folder-open"></i> My Projects</h1>
+          <p>View and manage all your drone inspection projects</p>
+        </div>
+        
+        <div id="all-projects" class="projects-grid"></div>
+      </section>
+      
+      <!-- DELIVERABLES SECTION -->
+      <section id="deliverables-section" class="dashboard-section">
+        <div class="section-header">
+          <h1><i class="fas fa-images"></i> Deliverables</h1>
+          <p>Download your inspection photos and videos</p>
+        </div>
+        
+        <div id="deliverables-grid" class="deliverables-grid"></div>
+      </section>
+      
+      <!-- PRICING SECTION -->
+      <section id="pricing-section" class="dashboard-section">
+        <div class="section-header">
+          <h1><i class="fas fa-calculator"></i> Get New Quote</h1>
+          <p>Calculate pricing for a new inspection</p>
+        </div>
+        
+        <div style="background: white; padding: 2rem; border-radius: 12px; text-align: center;">
+          <i class="fas fa-calculator" style="font-size: 3rem; color: var(--orange); margin-bottom: 1rem;"></i>
+          <h3 style="margin-bottom: 1rem;">Ready for another inspection?</h3>
+          <p style="color: var(--gray); margin-bottom: 2rem;">
+            Use our pricing calculator to get an instant quote for your next project.
+          </p>
+          <a href="pricing.html" class="btn-primary btn-large">
+            <i class="fas fa-arrow-right"></i> Go to Pricing Calculator
+          </a>
+        </div>
+      </section>
+      
+    </div>
+  </div>
+  
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>P.E.D Aerial</h3>
+      <p>FAA-certified drone inspection services.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+        <li><i class="fas fa-envelope"></i> hello@pedaerial.com</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 P.E.D Aerial. All rights reserved.</p>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<script src="js/script.js"></script>
+<script>
+// Portal Dashboard JavaScript
+(function() {
+  
+  // IMPORTANT: Removed auto-login check
+  // User ALWAYS sees login screen first
+  
+  // Handle login
+  document.getElementById('portal-login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('login-email').value.trim();
+    const code = document.getElementById('login-code').value.trim();
+    
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
+    
+    showDashboard(email);
+  });
+  
+  // Show dashboard
+  function showDashboard(email) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard-wrapper').style.display = 'flex';
+    
+    // Set user info
+    document.getElementById('user-email').textContent = email;
+    document.getElementById('user-name').textContent = email.split('@')[0];
+    
+    // Load demo data
+    loadDemoData();
+    
+    // Load dashboard data
+    loadDashboard();
+  }
+  
+  // Load demo data
+  function loadDemoData() {
+    const demoProjects = [
+      {
+        id: 'PRJ-001',
+        name: 'Main Street Office - Roof Inspection',
+        service: 'Roof Inspection',
+        status: 'completed',
+        total: '$268.92',
+        date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+        files: 8
+      },
+      {
+        id: 'PRJ-002',
+        name: 'Construction Site Progress Photos',
+        service: 'Construction Documentation',
+        status: 'in-progress',
+        total: '$496.44',
+        date: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+        files: 12
+      },
+      {
+        id: 'PRJ-003',
+        name: 'Residential Property Inspection',
+        service: 'Building Inspection',
+        status: 'pending',
+        total: '$324.00',
+        date: new Date().toISOString(),
+        files: 0
+      }
+    ];
+    
+    const demoDeliverables = [
+      { name: 'Roof_Overview_North.jpg', type: 'image', size: '4.2 MB', project: 'PRJ-001' },
+      { name: 'Roof_Overview_South.jpg', type: 'image', size: '3.8 MB', project: 'PRJ-001' },
+      { name: 'Damage_Detail_1.jpg', type: 'image', size: '2.1 MB', project: 'PRJ-001' },
+      { name: 'Site_Progress_Week1.mp4', type: 'video', size: '45 MB', project: 'PRJ-002' },
+      { name: 'Foundation_Aerial.jpg', type: 'image', size: '5.2 MB', project: 'PRJ-002' }
+    ];
+    
+    // Store in temporary session data (not localStorage)
+    window.sessionProjects = demoProjects;
+    window.sessionDeliverables = demoDeliverables;
+  }
+  
+  // Load dashboard
+  function loadDashboard() {
+    const projects = window.sessionProjects || [];
+    const deliverables = window.sessionDeliverables || [];
+    
+    // Update stats
+    document.getElementById('total-projects').textContent = projects.length;
+    document.getElementById('active-projects').textContent = 
+      projects.filter(p => p.status === 'in-progress' || p.status === 'pending').length;
+    document.getElementById('completed-projects').textContent = 
+      projects.filter(p => p.status === 'completed').length;
+    document.getElementById('total-files').textContent = deliverables.length;
+    document.getElementById('project-count').textContent = projects.length;
+    
+    // Load recent projects
+    loadRecentProjects(projects.slice(0, 3));
+    loadAllProjects(projects);
+    loadDeliverables(deliverables);
+  }
+  
+  // Load recent projects
+  function loadRecentProjects(projects) {
+    const container = document.getElementById('recent-projects');
+    
+    if (projects.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <h3>No Projects Yet</h3>
+          <p>Book your first inspection to get started!</p>
+          <a href="pricing.html" class="btn-primary" style="margin-top: 1rem;">Get Pricing</a>
+        </div>
+      `;
+      return;
+    }
+    
+    container.innerHTML = '';
+    projects.forEach(project => {
+      container.appendChild(createProjectCard(project));
+    });
+  }
+  
+  // Load all projects
+  function loadAllProjects(projects) {
+    const container = document.getElementById('all-projects');
+    
+    if (projects.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-folder-open"></i>
+          <h3>No Projects Yet</h3>
+          <p>Your inspection projects will appear here</p>
+        </div>
+      `;
+      return;
+    }
+    
+    container.innerHTML = '';
+    projects.forEach(project => {
+      container.appendChild(createProjectCard(project));
+    });
+  }
+  
+  // Create project card
+  function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <div class="project-header">
+        <div class="project-title">${project.name}</div>
+        <span class="project-status status-${project.status}">${project.status.replace('-', ' ')}</span>
+      </div>
+      <div class="project-details">
+        <div><i class="fas fa-drone"></i>${project.service}</div>
+        <div><i class="fas fa-dollar-sign"></i>${project.total}</div>
+        <div><i class="fas fa-images"></i>${project.files} files</div>
+      </div>
+      <div class="project-footer">
+        <span class="project-date">${new Date(project.date).toLocaleDateString()}</span>
+        <button class="btn-view" onclick="alert('Project Details:\\n\\nID: ${project.id}\\nStatus: ${project.status}\\nFiles: ${project.files}')">
+          <i class="fas fa-eye"></i> View
+        </button>
+      </div>
+    `;
+    return card;
+  }
+  
+  // Load deliverables
+  function loadDeliverables(deliverables) {
+    const container = document.getElementById('deliverables-grid');
+    
+    if (deliverables.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-images"></i>
+          <h3>No Files Yet</h3>
+          <p>Your inspection files will be available here once projects are completed</p>
+        </div>
+      `;
+      return;
+    }
+    
+    container.innerHTML = '';
+    deliverables.forEach(file => {
+      container.appendChild(createDeliverableCard(file));
+    });
+  }
+  
+  // Create deliverable card
+  function createDeliverableCard(file) {
+    const card = document.createElement('div');
+    card.className = 'deliverable-card';
+    card.innerHTML = `
+      <div class="deliverable-thumbnail">
+        <i class="fas fa-${file.type === 'video' ? 'video' : 'image'}"></i>
+      </div>
+      <div class="deliverable-info">
+        <div class="deliverable-name">${file.name}</div>
+        <div class="deliverable-meta">
+          <span>${file.type.toUpperCase()}</span>
+          <span>${file.size}</span>
+        </div>
+        <button class="btn-download" onclick="alert('Downloading ${file.name}...')">
+          <i class="fas fa-download"></i> Download
+        </button>
+      </div>
+    `;
+    return card;
+  }
+  
+  // Navigation
+  document.querySelectorAll('.dashboard-nav-item').forEach(item => {
+    item.addEventListener('click', function() {
+      // Update active nav
+      document.querySelectorAll('.dashboard-nav-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Show section
+      const section = this.getAttribute('data-section');
+      document.querySelectorAll('.dashboard-section').forEach(s => s.classList.remove('active'));
+      document.getElementById(section + '-section').classList.add('active');
+    });
+  });
+  
+  // Logout
+  document.getElementById('logout-btn').addEventListener('click', function() {
+    if (confirm('Are you sure you want to sign out?')) {
+      // Clear session and reload to show login
+      window.sessionProjects = null;
+      window.sessionDeliverables = null;
+      location.reload();
+    }
+  });
+  
+})();
+</script>
+
+</body>
+</html>

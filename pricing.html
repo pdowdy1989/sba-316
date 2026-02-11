@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Calculator | P.E.D Aerial</title>
+  <meta name="description" content="Calculate your drone inspection cost instantly. Transparent pricing with no hidden fees.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">P.E.D <span>Aerial</span></a>
+    
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="pricing.html" class="active">Get Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="portal.html" class="portal-link">Client Portal</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="page-content pricing-page">
+    
+    <div class="page-header">
+      <h1><i class="fas fa-calculator"></i> Instant Pricing Calculator</h1>
+      <p class="subtitle">Configure your inspection and see the exact cost in real-time. No email required, no callbacks, no surprises.</p>
+    </div>
+
+    <div class="calculator-wrapper">
+      
+      <!-- CALCULATOR FORM -->
+      <div class="calculator-form-section">
+        <h2>Configure Your Inspection</h2>
+        
+        <form id="pricing-calculator" class="pricing-form">
+          
+          <div class="form-group">
+            <label for="service-type">
+              <i class="fas fa-drone"></i> What do you need inspected? *
+            </label>
+            <select id="service-type" required>
+              <option value="">Select a service...</option>
+              <option value="roof" data-base-price="199">Roof Inspection - $199</option>
+              <option value="building" data-base-price="249">Building Inspection - $249</option>
+              <option value="construction" data-base-price="349">Construction Progress - $349</option>
+              <option value="real-estate" data-base-price="299">Real Estate Photos - $299</option>
+              <option value="insurance" data-base-price="229">Insurance Documentation - $229</option>
+              <option value="solar" data-base-price="279">Solar Panel Inspection - $279</option>
+            </select>
+            <small>Base price includes standard inspection with high-res photos</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="property-size">
+              <i class="fas fa-ruler-combined"></i> Property size *
+            </label>
+            <select id="property-size" required>
+              <option value="">Select property size...</option>
+              <option value="small" data-multiplier="1.0">Small (Under 2,000 sq ft) - No extra charge</option>
+              <option value="medium" data-multiplier="1.25">Medium (2,000-5,000 sq ft) - +25%</option>
+              <option value="large" data-multiplier="1.5">Large (5,000-10,000 sq ft) - +50%</option>
+              <option value="xlarge" data-multiplier="2.0">Extra Large (Over 10,000 sq ft) - +100%</option>
+            </select>
+            <small>Larger properties require more flight time and battery changes</small>
+          </div>
+          
+          <div class="form-group">
+            <label>
+              <i class="fas fa-plus-circle"></i> Optional add-ons
+            </label>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" class="addon-checkbox" data-price="99" data-name="Rush Delivery (24hrs)">
+                <div class="checkbox-content">
+                  <span class="checkbox-title">Rush Delivery (24 hours)</span>
+                  <span class="checkbox-price">+$99</span>
+                </div>
+                <small>Priority processing and expedited delivery</small>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" class="addon-checkbox" data-price="149" data-name="4K Video Recording">
+                <div class="checkbox-content">
+                  <span class="checkbox-title">4K Video Recording</span>
+                  <span class="checkbox-price">+$149</span>
+                </div>
+                <small>Cinematic 4K video fly-through of your property</small>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" class="addon-checkbox" data-price="199" data-name="Thermal Imaging">
+                <div class="checkbox-content">
+                  <span class="checkbox-title">Thermal Imaging</span>
+                  <span class="checkbox-price">+$199</span>
+                </div>
+                <small>Detect heat loss, moisture, and insulation issues</small>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" class="addon-checkbox" data-price="79" data-name="3D Model Generation">
+                <div class="checkbox-content">
+                  <span class="checkbox-title">3D Model Generation</span>
+                  <span class="checkbox-price">+$79</span>
+                </div>
+                <small>Interactive 3D model of your property</small>
+              </label>
+              
+              <label class="checkbox-label">
+                <input type="checkbox" class="addon-checkbox" data-price="49" data-name="Detailed PDF Report">
+                <div class="checkbox-content">
+                  <span class="checkbox-title">Detailed PDF Report</span>
+                  <span class="checkbox-price">+$49</span>
+                </div>
+                <small>Professional report with annotations and findings</small>
+              </label>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+      
+      <!-- PRICE SUMMARY (STICKY) -->
+      <div class="price-summary-section">
+        <div class="price-summary sticky">
+          <h2>Your Quote</h2>
+          
+          <div id="quote-breakdown" class="quote-breakdown">
+            <div class="empty-state">
+              <i class="fas fa-arrow-left"></i>
+              <p>Select a service and property size to see your price</p>
+            </div>
+          </div>
+          
+          <div class="price-totals">
+            <div class="price-row">
+              <span>Subtotal:</span>
+              <span id="subtotal-price">$0.00</span>
+            </div>
+            <div class="price-row tax-row">
+              <span>Tax (8%):</span>
+              <span id="tax-price">$0.00</span>
+            </div>
+            <div class="price-row total-row">
+              <span>Total:</span>
+              <span id="total-price">$0.00</span>
+            </div>
+          </div>
+          
+          <button type="button" id="book-inspection" class="btn-primary btn-large" disabled>
+            <i class="fas fa-check-circle"></i> Book This Inspection
+          </button>
+          
+          <button type="button" id="save-quote" class="btn-secondary btn-large" disabled>
+            <i class="fas fa-save"></i> Save Quote for Later
+          </button>
+          
+          <div class="pricing-notes">
+            <p><i class="fas fa-info-circle"></i> <strong>What's included:</strong></p>
+            <ul>
+              <li>Pre-flight site planning</li>
+              <li>Professional drone flight</li>
+              <li>High-resolution photos</li>
+              <li>Cloud delivery within 48 hours</li>
+              <li>Direct pilot communication</li>
+            </ul>
+            
+            <p class="fine-print">
+              <i class="fas fa-shield-alt"></i> Final pricing may vary based on site accessibility and weather conditions. Quote valid for 30 days.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- PRICING TABLE -->
+    <div class="pricing-table-section">
+      <h2 class="section-title">All Services at a Glance</h2>
+      
+      <div class="pricing-table">
+        <div class="pricing-row pricing-header">
+          <div class="pricing-cell">Service</div>
+          <div class="pricing-cell">Small Property</div>
+          <div class="pricing-cell">Medium Property</div>
+          <div class="pricing-cell">Large Property</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Roof Inspection</strong></div>
+          <div class="pricing-cell">$199</div>
+          <div class="pricing-cell">$249</div>
+          <div class="pricing-cell">$299</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Building Inspection</strong></div>
+          <div class="pricing-cell">$249</div>
+          <div class="pricing-cell">$311</div>
+          <div class="pricing-cell">$374</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Construction Progress</strong></div>
+          <div class="pricing-cell">$349</div>
+          <div class="pricing-cell">$436</div>
+          <div class="pricing-cell">$524</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Real Estate Photos</strong></div>
+          <div class="pricing-cell">$299</div>
+          <div class="pricing-cell">$374</div>
+          <div class="pricing-cell">$449</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Insurance Claims</strong></div>
+          <div class="pricing-cell">$229</div>
+          <div class="pricing-cell">$286</div>
+          <div class="pricing-cell">$344</div>
+        </div>
+        
+        <div class="pricing-row">
+          <div class="pricing-cell"><strong>Solar Inspection</strong></div>
+          <div class="pricing-cell">$279</div>
+          <div class="pricing-cell">$349</div>
+          <div class="pricing-cell">$419</div>
+        </div>
+      </div>
+      
+      <p class="table-note">Prices shown are before tax and optional add-ons. Use calculator above for exact quote.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2 class="section-title">Pricing Questions</h2>
+      
+      <div class="faq-grid">
+        <div class="faq-item">
+          <h3><i class="fas fa-question-circle"></i> Are there any hidden fees?</h3>
+          <p>No. The price you see in the calculator is exactly what you pay (plus tax). No travel fees, no "processing fees," no surprises.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3><i class="fas fa-question-circle"></i> What if weather delays my inspection?</h3>
+          <p>We'll reschedule at no extra charge. You only pay when we successfully complete your inspection.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3><i class="fas fa-question-circle"></i> Do you offer discounts for multiple inspections?</h3>
+          <p>Yes! Contact us for bulk pricing if you need regular inspections or multiple properties.</p>
+        </div>
+        
+        <div class="faq-item">
+          <h3><i class="fas fa-question-circle"></i> What payment methods do you accept?</h3>
+          <p>Credit card, debit card, PayPal, and invoicing for commercial clients. Payment due after inspection is complete.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pricing-cta">
+      <h2>Questions About Pricing?</h2>
+      <p>We're happy to discuss your specific needs and provide a custom quote.</p>
+      <a href="contact.html" class="primary-btn">
+        <i class="fas fa-phone"></i> Contact Us
+      </a>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>P.E.D Aerial</h3>
+      <p>FAA-certified drone inspection services.</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="services.html">All Services</a></li>
+        <li><a href="pricing.html">Pricing Calculator</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+        <li><i class="fas fa-envelope"></i> hello@pedaerial.com</li>
+        <li><i class="fas fa-clock"></i> Mon-Sat: 8am-6pm</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2024 P.E.D Aerial. All rights reserved.</p>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<!-- Booking Modal -->
+<div id="booking-modal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-header">
+      <h2><i class="fas fa-calendar-check"></i> Book Your Inspection</h2>
+    </div>
+    <div class="modal-body">
+      <p class="modal-summary">Your quote: <strong id="modal-total">$0.00</strong></p>
+      
+      <form id="booking-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="book-name">Your Name *</label>
+            <input type="text" id="book-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="book-email">Email *</label>
+            <input type="email" id="book-email" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="book-phone">Phone *</label>
+            <input type="tel" id="book-phone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="book-date">Preferred Date</label>
+            <input type="date" id="book-date">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="book-address">Property Address *</label>
+          <input type="text" id="book-address" required placeholder="123 Main St, City, State">
+        </div>
+        
+        <div class="form-group">
+          <label for="book-notes">Additional Notes</label>
+          <textarea id="book-notes" rows="3" placeholder="Any special requirements or access instructions?"></textarea>
+        </div>
+        
+        <button type="submit" class="btn-primary btn-large">
+          <i class="fas fa-check"></i> Confirm Booking
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
