@@ -1,83 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>P.E.D Aerial Inspection</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P.E.D Aerial | Professional Drone Inspections</title>
+  <meta name="description" content="Professional drone inspections for buildings, roofs, and job sites. Clear visuals. Straightforward process.">
+  
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
 
-  <!-- Navigation -->
-  <nav id="main-nav">
-    <h1 id="brand-name">P.E.D Aerial Inspection</h1>
-    <ul>
-      <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#services" class="nav-link">Services</a></li>
-      <li><a href="#request" class="nav-link">Request Inspection</a></li>
-    </ul>
-  </nav>
+<body id="top">
 
-  <!-- Home / Hero Section -->
-  <section id="home">
-    <h2>Professional Drone Inspections</h2>
-    <p>
-      Roof, property, and commercial aerial inspections using FAA Part 107 certified drone pilots.
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">P.E.D <span>Aerial</span></a>
+
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="request.html">Request</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- HERO SECTION -->
+<section class="hero">
+  <video
+  class="hero-video"
+  autoplay
+  muted
+  loop
+  playsinline
+  preload="auto"
+  aria-hidden="true"
+>
+  <source src="assets/videos/hero.mp4" type="video/mp4">
+  <source src="assets/videos/hero.webm" type="video/webm"> <!-- Add WebM fallback -->
+  <p>Your browser doesn't support HTML5 video. Here is a <a href="assets/video/hero.mp4">link to the video</a> instead.</p>
+</video>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>Professional <span>Drone</span> Inspections</h1>
+    <p class="searchable">
+      We use drones to check buildings, roofs, and construction sites.
+      Fast, safe, and clear reports for everyone.
     </p>
-    <button id="request-btn">Request an Inspection</button>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services">
-    <h2>Our Services</h2>
-
-    <ul id="services-list">
-      <li class="service-item">Roof Inspections</li>
-      <li class="service-item">Real Estate Aerial Photography</li>
-      <li class="service-item">Construction Progress Monitoring</li>
-      <li class="service-item">Insurance Documentation</li>
-    </ul>
-  </section>
-
-  <!-- Request Inspection Form -->
-  <section id="request">
-    <h2>Request an Inspection</h2>
-
-    <form id="inspection-form">
-      <label>
-        Name:
-        <input type="text" id="name" required>
-      </label>
-
-      <label>
-        Email:
-        <input type="email" id="email" required>
-      </label>
-
-      <label>
-        Property Type:
-        <select id="property-type" required>
-          <option value="">Select one</option>
-          <option value="residential">Residential</option>
-          <option value="commercial">Commercial</option>
-        </select>
-      </label>
-
-      <button type="submit" id="submit-btn">Submit Request</button>
-    </form>
-  </section>
-
-  <!-- Confirmation Section -->
-<section id="confirmation" hidden>
-  <h2>Thank You!</h2>
-  <p id="confirmation-message"></p>
-  <div id="submission-log"></div>
+    <a href="request.html" class="primary-btn">Get Your Free Quote Today</a>
+  </div>
 </section>
 
-  <!-- JavaScript -->
-  <script src="js/script.js"></script>
 
+  <!-- WHAT I DO -->
+  <section class="page-content">
+    <h1>What We Do</h1>
+
+    <p style="max-width: 720px;">
+      P.E.D Aerial provides drone-based inspections designed to give you a clear view
+      of areas that are difficult, unsafe, or time-consuming to access from the ground.
+    </p>
+
+    <div class="service-grid">
+      <div class="service-item">
+        <h3><i class="fas fa-home"></i> Roof & Building Inspections</h3>
+        <p>Exterior documentation of roofs, walls, and elevated structures.</p>
+      </div>
+
+      <div class="service-item">
+        <h3><i class="fas fa-hard-hat"></i> Construction Documentation</h3>
+        <p>Progress images and site overviews for ongoing projects.</p>
+      </div>
+
+      <div class="service-item">
+        <h3><i class="fas fa-camera"></i> Aerial Photos & Video</h3>
+        <p>High-resolution visuals for records, planning, or presentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="page-content" style="padding-top: 0;">
+    <h2>How It Works</h2>
+
+    <div style="max-width: 800px;">
+      <ol>
+        <li>You submit a request with basic details.</li>
+        <li>I review the scope and confirm next steps.</li>
+        <li>The inspection is completed as scheduled.</li>
+        <li>You receive the final visuals and documentation.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA (SOFT, NOT SALESY) -->
+  <section class="page-content">
+    <div style="
+      background: var(--gray-light);
+      padding: 2.5rem;
+      border-radius: 8px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    ">
+      <h2>Need Aerial Documentation?</h2>
+      <p style="max-width: 600px; margin: 1.5rem auto;">
+        If drone inspections make sense for your project, you can submit a request
+        and I’ll follow up with details.
+      </p>
+      <a href="request.html" class="primary-btn">Request a Quote</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>P.E.D Aerial</h3>
+      <p>Professional drone inspection services.</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><i class="fas fa-envelope"></i> service@pedaerial.com</li>
+        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Credentials</h3>
+      <ul>
+        <li>FAA Part 107 Certified</li>
+        <li>Licensed & Insured</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 P.E.D Aerial</p>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get a Quote | P.E.D Aerial Inspection</title>
+  <meta name="description" content="Get a free quote for drone inspection services. Simple form, fast response.">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body id="top">
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">P.E.D <span>Aerial</span></a>
+    
+    <button class="hamburger" aria-label="Menu" aria-expanded="false">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="request.html" class="active">Get Quote</a></li>
+        <li><a href="about.html">About Me</a></li>
+      </ul>
+    </nav>
+    
+    <div class="search-box">
+      <input type="text" placeholder="Search services..." aria-label="Search">
+      <button aria-label="Search"><i class="fas fa-search"></i></button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+ 
+  <section id="request" class="page-content">
+    <h1>Get Your Free Quote</h1>
+    <p class="searchable">Fill out this simple form to get a price for your drone inspection. I'll contact you within 24 hours with more details.</p>
+    
+    <div style="background: var(--gray-light); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid var(--orange);">
+      <h3 style="color: var(--charcoal); margin-bottom: 0.5rem;"><i class="fas fa-info-circle" style="color: var(--orange);"></i> What Happens Next?</h3>
+      <p style="margin: 0;">1. You fill out this form<br>
+      2. I call or email you within 24 hours<br>
+      3. We schedule a time to fly<br>
+      4. You get your report in 24 hours</p>
+    </div>
+    
+    <form id="inspection-form">
+      <h2 style="color: var(--charcoal); margin: 2rem 0 1rem;">Your Information</h2>
+      
+      <div class="form-row">
+        <label>
+          First Name:
+          <input type="text" id="first-name" name="first-name" required placeholder="John" />
+        </label>
+        
+        <label>
+          Last Name:
+          <input type="text" id="last-name" name="last-name" required placeholder="Doe" />
+        </label>
+      </div>
+      
+      <label>
+        Email Address:
+        <input type="email" id="email" name="email" required placeholder="john@example.com" />
+      </label>
+      
+      <label>
+        Phone Number:
+        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567" />
+      </label>
+      
+      <h2 style="color: var(--charcoal); margin: 2rem 0 1rem;">What Do You Need?</h2>
+      
+      <label>
+        What type of property?
+        <select id="property-type" name="property-type" required>
+          <option value="">Choose one...</option>
+          <option value="home">Home / House</option>
+          <option value="business">Business Building</option>
+          <option value="construction">Construction Site</option>
+          <option value="farm">Farm / Land</option>
+          <option value="other">Other</option>
+        </select>
+      </label>
+      
+      <label>
+        What service do you need?
+        <select id="service-type" name="service-type" required>
+          <option value="">Choose one...</option>
+          <option value="roof">Roof Check</option>
+          <option value="building">Building Check</option>
+          <option value="construction">Construction Photos</option>
+          <option value="real-estate">Real Estate Photos</option>
+          <option value="insurance">Insurance Pictures</option>
+          <option value="not-sure">Not Sure - Help Me Choose</option>
+        </select>
+      </label>
+      
+      <label>
+        Property Address (if known):
+        <input type="text" id="address" name="address" placeholder="123 Main Street, City, State" />
+      </label>
+      
+      <label>
+        Tell me more about what you need:
+        <textarea id="details" name="details" rows="4" placeholder="Example: 'I need to check my roof for storm damage' or 'I want weekly photos of my construction site'"></textarea>
+      </label>
+      
+      <div style="background: #fff3e0; padding: 1rem; border-radius: 4px; margin: 1.5rem 0; border: 1px solid #ffcc80;">
+        <label style="display: flex; align-items: start; gap: 0.5rem; cursor: pointer; font-size: 0.95rem;">
+          <input type="checkbox" id="agree" name="agree" required style="margin-top: 0.25rem;" />
+          <span>Yes, I want P.E.D Aerial to contact me about this quote. I understand this is free with no obligation.</span>
+        </label>
+      </div>
+      
+      <button id="submit-btn" type="submit" class="primary-btn">
+        <i class="fas fa-paper-plane"></i> Get My Free Quote
+      </button>
+      
+      <p style="text-align: center; margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+        <i class="fas fa-lock"></i> Your information is secure and will only be used for your quote.
+      </p>
+    </form>
+    
+    <section id="confirmation" hidden>
+      <div style="text-align: center;">
+        <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--success); margin-bottom: 1.5rem;"></i>
+        <h2>Request Submitted Successfully!</h2>
+        <p id="confirmation-message" style="font-size: 1.2rem; margin-bottom: 2rem;"></p>
+        <p style="color: var(--gray); margin-bottom: 2rem;">
+          <i class="fas fa-envelope"></i> A confirmation email has been sent to your inbox.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="index.html" class="primary-btn secondary-btn" style="border-color: var(--charcoal); color: var(--charcoal);">Return Home</a>
+          <a href="services.html" class="primary-btn">Browse Services</a>
+        </div>
+      </div>
+    </section>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Quick Response</h3>
+      <p>I respond to all quote requests within 24 hours. For urgent needs, call me directly.</p>
+      <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Service Hours</h3>
+      <ul>
+        <li>Monday-Friday: 8am-6pm</li>
+        <li>Saturday: 9am-2pm</li>
+        <li>Emergency: Call anytime</li>
+      </ul>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Why Choose Me</h3>
+      <ul>
+        <li>FAA Certified Pilot</li>
+        <li>Introductory Pricing</li>
+        <li>Personal Service</li>
+        <li>Clear Communication</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2024 P.E.D Aerial. All quote requests handled personally by Alex Morgan.</p>
+    <p style="margin-top: 0.5rem;">FAA Part 107 Certified | DJI Air 2S | Licensed & Insured</p>
+  </div>
+</footer>
+
+<a href="#top" class="back-to-top" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<script src="js/script.js"></script>
+</body>
+</html>
