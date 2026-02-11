@@ -1,4 +1,5 @@
 /* =========================
+<<<<<<< HEAD
    GLOBAL STYLES & RESET
 ========================= */
 :root {
@@ -95,10 +96,61 @@ body {
   list-style: none;
   display: flex;
   gap: 1.5rem;
+=======
+   GLOBAL STYLES
+========================= */
+:root {
+  --primary: #0a2540;
+  --accent: #2f80ed;
+  --success: #27ae60;
+  --light: #f5f7fa;
+  --dark: #111;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+#main-nav {
+  background: white;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+}
+
+#brand-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+#main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+>>>>>>> 25ff7245fa8d5c77bfca689a9f64a9610bc45691
   margin: 0;
   padding: 0;
 }
 
+<<<<<<< HEAD
 .nav-links a {
   text-decoration: none;
   color: var(--white);
@@ -521,12 +573,132 @@ body {
   margin: 1rem 0;
   border-left: 4px solid var(--error);
   animation: shake 0.5s ease;
+=======
+.nav-link {
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+section {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+h2 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+/* =========================
+   HERO
+========================= */
+#home {
+  text-align: center;
+  padding-top: 80px;
+}
+
+#home p {
+  max-width: 700px;
+  margin: 0 auto 24px;
+  font-size: 1.1rem;
+}
+
+#request-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#request-btn:hover {
+  background: #1c6ed5;
+}
+
+/* =========================
+   SERVICES
+========================= */
+#services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 0;
+  list-style: none;
+}
+
+.service-item {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   FORM
+========================= */
+form {
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  max-width: 500px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  margin-top: 12px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button[disabled] {
+  background: #999;
+  cursor: not-allowed;
+>>>>>>> 25ff7245fa8d5c77bfca689a9f64a9610bc45691
 }
 
 /* =========================
    CONFIRMATION
 ========================= */
 #confirmation {
+<<<<<<< HEAD
   background: var(--gray-light);
   padding: 3rem;
   border-radius: 8px;
@@ -918,3 +1090,21 @@ body {
     display: flex;
   }
 }
+=======
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+#submission-log p {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+}
+
+#request {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+>>>>>>> 25ff7245fa8d5c77bfca689a9f64a9610bc45691

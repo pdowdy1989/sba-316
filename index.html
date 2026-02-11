@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>P.E.D Aerial | Professional Drone Inspections</title>
@@ -160,5 +161,85 @@
 </a>
 
 <script src="js/script.js"></script>
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P.E.D Aerial Inspection</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="main-nav">
+    <h1 id="brand-name">P.E.D Aerial Inspection</h1>
+    <ul>
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#services" class="nav-link">Services</a></li>
+      <li><a href="#request" class="nav-link">Request Inspection</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home / Hero Section -->
+  <section id="home">
+    <h2>Professional Drone Inspections</h2>
+    <p>
+      Roof, property, and commercial aerial inspections using FAA Part 107 certified drone pilots.
+    </p>
+    <button id="request-btn">Request an Inspection</button>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2>Our Services</h2>
+
+    <ul id="services-list">
+      <li class="service-item">Roof Inspections</li>
+      <li class="service-item">Real Estate Aerial Photography</li>
+      <li class="service-item">Construction Progress Monitoring</li>
+      <li class="service-item">Insurance Documentation</li>
+    </ul>
+  </section>
+
+  <!-- Request Inspection Form -->
+  <section id="request">
+    <h2>Request an Inspection</h2>
+
+    <form id="inspection-form">
+      <label>
+        Name:
+        <input type="text" id="name" required>
+      </label>
+
+      <label>
+        Email:
+        <input type="email" id="email" required>
+      </label>
+
+      <label>
+        Property Type:
+        <select id="property-type" required>
+          <option value="">Select one</option>
+          <option value="residential">Residential</option>
+          <option value="commercial">Commercial</option>
+        </select>
+      </label>
+
+      <button type="submit" id="submit-btn">Submit Request</button>
+    </form>
+  </section>
+
+  <!-- Confirmation Section -->
+<section id="confirmation" hidden>
+  <h2>Thank You!</h2>
+  <p id="confirmation-message"></p>
+  <div id="submission-log"></div>
+</section>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+
+>>>>>>> 25ff7245fa8d5c77bfca689a9f64a9610bc45691
 </body>
 </html>
